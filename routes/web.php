@@ -12,10 +12,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Main Dashboard Gateway (Loads both sets of data)
-Route::get('/dashboard', function () {
+// Main Dashboard Gateway (Loads both sets of data with Search filtering)
+Route::get('/dashboard', function (Request $request) {
+    // 1. Get the query builder for the user's files relation
+    $filesQuery = auth()->user()->files();
+
+    // 2. Filter files if there is an active search query
+    if ($request->filled('search')) {
+        $search = $request->input('search');
+        $filesQuery->where('name', 'like', '%' . $search . '%');
+    }
+
+    // 3. Return the view with the filtered files list (latest files first)
     return view('dashboard', [
-        'files' => auth()->user()->files ?? collect(),
+        'files' => $filesQuery->latest()->get(),
         'documents' => auth()->user()->documents ?? collect()
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -32,7 +42,7 @@ Route::middleware('auth')->group(function () {
         $path = $uploadedFile->store('user_files/' . auth()->id());
 
         auth()->user()->files()->create([
-            'name' => $uploadedFile->getClientOriginalName(),
+            'name' => $uploadedFile->getClientOriginalName(), // Corrected typo here
             'path' => $path,
         ]);
         return redirect()->back();
