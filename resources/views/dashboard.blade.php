@@ -14,14 +14,14 @@
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 pb-5 border-b border-slate-100 dark:border-slate-700/50">
                         <div>
                             <h3 class="text-lg font-bold text-slate-800 dark:text-slate-200">Files</h3>
-                            <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Manage and download your uploaded document assets</p>
+                            <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Manage and download your uploaded document assets.</p>
                         </div>
                         
                         <div class="flex items-center gap-3">
-                            <form action="{{ url()->current() }}" method="GET" class="m-0 p-0">
+                            <form action="{{ url()->current() }}" method="GET" class="relative block m-0 p-0">
                                 <div class="relative w-64">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                        <svg class="h-4 w-4 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <svg class="h-5 w-5 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                         </svg>
                                     </div>
@@ -31,7 +31,7 @@
                                         name="search" 
                                         value="{{ request('search') }}" 
                                         placeholder="Search files by name..." 
-                                        class="block w-full pl-9 pr-8 py-2 text-sm bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 border border-slate-200 dark:border-slate-700/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-150"
+                                        class="block w-full pl-10 pr-8 py-2 text-sm bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 border border-slate-200 dark:border-slate-700/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-150"
                                     />
 
                                     @if(request('search'))
