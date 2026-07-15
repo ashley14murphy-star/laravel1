@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function () {
         $document->delete();
         return redirect()->back();
     })->name('documents.destroy');
+    
 });
 
 require __DIR__.'/auth.php';
