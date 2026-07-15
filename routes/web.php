@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
         $path = $uploadedFile->store('user_files/' . auth()->id());
 
         auth()->user()->files()->create([
-            'name' => $uploadedFile->getClientOriginalName(), // Corrected typo here
+            'name' => $uploadedFile->getClientOriginalName(),
             'path' => $path,
         ]);
         return redirect()->back();
@@ -51,6 +51,21 @@ Route::middleware('auth')->group(function () {
         if ($file->user_id !== auth()->id()) abort(403);
         return Storage::download($file->path, $file->name);
     })->name('files.download');
+
+    // Update File Details (Edit route)
+    Route::patch('/files/{file}', function (Request $request, File $file) {
+        if ($file->user_id !== auth()->id()) abort(403);
+        
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $file->update([
+            'name' => $request->input('name')
+        ]);
+
+        return redirect()->back();
+    })->name('files.update');
 
     Route::delete('/files/{file}', function (File $file) {
         if ($file->user_id !== auth()->id()) abort(403);
