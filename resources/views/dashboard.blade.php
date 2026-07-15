@@ -12,7 +12,7 @@
                 <div class="p-6">
                     <div class="flex justify-between items-center mb-6">
                         <div>
-                            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-200">Filess</h3>
+                            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-200">Files</h3>
                             <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Manage and download your uploaded document assets.</p>
                         </div>
                         
