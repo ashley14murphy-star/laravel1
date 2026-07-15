@@ -10,22 +10,51 @@
 
             <div class="bg-white dark:bg-slate-800 overflow-hidden shadow-sm rounded-xl border border-slate-200 dark:border-slate-700">
                 <div class="p-6">
-                    <div class="flex justify-between items-center mb-6">
+                    
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 pb-5 border-b border-slate-100 dark:border-slate-700/50">
                         <div>
                             <h3 class="text-lg font-bold text-slate-800 dark:text-slate-200">Files</h3>
                             <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Manage and download your uploaded document assets.</p>
                         </div>
                         
-                        <form action="{{ route('files.upload') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <label class="cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg inline-flex items-center gap-2 text-sm shadow-sm transition-colors duration-200">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16a3 3 0 013-3h12a3 3 0 013 3m-9-5l3-3m0 0l3 3m-3-3v12"></path>
-                                </svg>
-                                <span>Upload New Document</span>
-                                <input type="file" name="file" class="hidden" onchange="this.form.submit()">
-                            </label>
-                        </form>
+                        <div class="flex items-center gap-3">
+                            <form action="{{ url()->current() }}" method="GET" class="m-0 p-0">
+                                <div class="relative w-64">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="h-4 w-4 text-slate-400 dark:text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                        </svg>
+                                    </div>
+                                    
+                                    <input 
+                                        type="text" 
+                                        name="search" 
+                                        value="{{ request('search') }}" 
+                                        placeholder="Search files by name..." 
+                                        class="block w-full pl-9 pr-8 py-2 text-sm bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 border border-slate-200 dark:border-slate-700/80 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all duration-150"
+                                    />
+
+                                    @if(request('search'))
+                                        <a href="{{ url()->current() }}" class="absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200" title="Clear search">
+                                            <svg class="h-4 w-4 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 p-0.5 rounded-full transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </a>
+                                    @endif
+                                </div>
+                            </form>
+
+                            <form action="{{ route('files.upload') }}" method="POST" enctype="multipart/form-data" class="m-0 p-0">
+                                @csrf
+                                <label class="cursor-pointer bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg inline-flex items-center justify-center gap-2 text-sm shadow-sm hover:shadow transition-all duration-150 whitespace-nowrap">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16a3 3 0 013-3h12a3 3 0 013 3m-9-5l3-3m0 0l3 3m-3-3v12"></path>
+                                    </svg>
+                                    <span>Upload New Document</span>
+                                    <input type="file" name="file" class="hidden" onchange="this.form.submit()">
+                                </label>
+                            </form>
+                        </div>
                     </div>
 
                     <div class="overflow-x-auto rounded-lg border border-slate-100 dark:border-slate-700/50">
@@ -93,7 +122,7 @@
                                         <td colspan="4" class="px-6 py-10 text-center text-slate-400 dark:text-slate-500 italic bg-white dark:bg-slate-800">
                                             <div class="flex flex-col items-center justify-center gap-2">
                                                 <svg class="w-8 h-8 text-slate-300 dark:text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-                                                <span>No files uploaded yet.</span>
+                                                <span>{{ request('search') ? 'No files match your search.' : 'No files uploaded yet.' }}</span>
                                             </div>
                                         </td>
                                     </tr>
