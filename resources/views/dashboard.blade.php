@@ -62,7 +62,7 @@
                             <thead>
                                 <tr class="bg-slate-50 dark:bg-slate-900 text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
                                     <th class="px-6 py-3.5">File Name</th>
-                                    <th class="px-6 py-3.5">Category</th>
+                                    <th class="px-6 py-3.5">Categoryy</th>
                                     <th class="px-6 py-3.5">Uploader</th>
                                     <th class="px-6 py-3.5 text-right w-32">Action</th>
                                 </tr>
