@@ -64,7 +64,7 @@
                                     <th class="px-6 py-3.5">File Name</th>
                                     <th class="px-6 py-3.5">Category</th>
                                     <th class="px-6 py-3.5">Uploader</th>
-                                    <th class="px-6 py-3.5 text-right w-32">Action</th>
+                                    <th class="px-6 py-3.5 text-right w-44">Action</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-200 dark:divide-slate-700 bg-white dark:bg-slate-800">
@@ -102,6 +102,12 @@
                                                     </svg>
                                                 </a>
 
+                                                <button onclick="document.getElementById('edit-modal-{{ $file->id }}').showModal()" class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 hover:bg-amber-50 text-slate-600 hover:text-amber-600 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-amber-950/30 dark:hover:text-amber-400 transition-colors" title="Rename File">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                    </svg>
+                                                </button>
+
                                                 <form action="{{ route('files.destroy', $file->id) }}" method="POST" onsubmit="return confirm('Delete this file?');" class="inline m-0 p-0">
                                                     @csrf
                                                     @method('DELETE')
@@ -112,6 +118,46 @@
                                                     </button>
                                                 </form>
                                             </div>
+
+                                            <dialog id="edit-modal-{{ $file->id }}" class="rounded-xl p-0 border border-slate-200 dark:border-slate-700 shadow-2xl bg-white dark:bg-slate-800 backdrop:bg-slate-900/40 backdrop:backdrop-blur-sm w-full max-w-md">
+                                                <div class="p-6">
+                                                    <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-700/50">
+                                                        <h3 class="text-base font-bold text-slate-800 dark:text-slate-200">Rename Asset</h3>
+                                                        <button onclick="document.getElementById('edit-modal-{{ $file->id }}').close()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                                                        </button>
+                                                    </div>
+
+                                                    <form action="{{ route('files.update', $file->id) }}" method="POST" class="mt-4 space-y-4">
+                                                        @csrf
+                                                        @method('PATCH')
+
+                                                        <div class="text-left">
+                                                            <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">File Name & Extension</label>
+                                                            <input 
+                                                                type="text" 
+                                                                name="name" 
+                                                                value="{{ $file->name }}" 
+                                                                required
+                                                                class="block w-full px-3 py-2 text-sm bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                                                            />
+                                                            <p class="text-[11px] text-slate-400 dark:text-slate-500 mt-2 leading-relaxed">
+                                                                💡 **Pro Tip:** Changing the file extension at the end (e.g., from `.sql` to `.png`) will automatically update its categorized badge dynamically!
+                                                            </p>
+                                                        </div>
+
+                                                        <div class="flex justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-700/50">
+                                                            <button type="button" onclick="document.getElementById('edit-modal-{{ $file->id }}').close()" class="px-4 py-2 text-sm font-medium text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors">
+                                                                Cancel
+                                                            </button>
+                                                            <button type="submit" class="px-4 py-2 text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg shadow-sm transition-colors">
+                                                                Save Changes
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </dialog>
+
                                         </td>
                                     </tr>
                                 @empty
