@@ -7,6 +7,8 @@ export default {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './resources/js/**/*.vue', // Added in case you use Vue components later
+        './resources/js/**/*.jsx', // Added in case you use React components later
     ],
 
     theme: {
@@ -14,6 +16,7 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            // You can easily add custom brand colors here if needed
         },
     },
 
