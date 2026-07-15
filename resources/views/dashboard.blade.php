@@ -43,17 +43,18 @@
                                     @endif
                                 </div>
                             </form>
-
                             <form action="{{ route('files.upload') }}" method="POST" enctype="multipart/form-data" style="margin: 0; padding: 0;">
-                                @csrf
-                                <label class="bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-medium py-2 px-4 rounded-lg inline-flex items-center justify-center gap-2 text-sm shadow-sm hover:shadow transition-all duration-150 whitespace-nowrap" style="cursor: pointer; height: 2.375rem;">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            @csrf
+                                <label class="bg-white border border-blue-300 hover:bg-blue-50 active:bg-blue-100 text-blue-600 font-medium py-2 px-4 rounded-lg inline-flex items-center justify-center gap-2 text-sm shadow-sm hover:shadow transition-all duration-150 whitespace-nowrap" style="cursor: pointer; height: 2.375rem;">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" xmlns="http://w3.org">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 16a3 3 0 013-3h12a3 3 0 013 3m-9-5l3-3m0 0l3 3m-3-3v12"></path>
                                     </svg>
                                     <span>Upload New Document</span>
                                     <input type="file" name="file" class="hidden" onchange="this.form.submit()">
                                 </label>
                             </form>
+
+
                         </div>
                     </div>
 
