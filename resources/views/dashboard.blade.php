@@ -14,7 +14,7 @@
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 pb-5 border-b border-slate-100 dark:border-slate-700/50">
                         <div>
                             <h3 class="text-lg font-bold text-slate-800 dark:text-slate-200">Files</h3>
-                            <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Manage and download your uploaded document assets.</p>
+                            <p class="text-xs text-slate-400 dark:text-slate-500 mt-0.5">Manage and download your uploaded document assets</p>
                         </div>
                         
                         <div class="flex items-center gap-3">
